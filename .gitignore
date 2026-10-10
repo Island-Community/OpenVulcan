@@ -1,0 +1,35 @@
+.local/
+.gradle/
+build/
+out/
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+*.class
+
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+*.zip
+
+gradle-*/
+wrapper/dists/
+
+tools/
+mappings/
+recovery/
+
+# Local conversation exports and migration scripts.
+/opencode-session.json
+/opencode_to_codex.py
+/repair_codex_import.py
+/05-lava-motion.gif
+/10-branch-search.gif
+
+# Generated server data.
+/logs/
+/plugins/
+/server.properties
+/eula.txt
+*.log

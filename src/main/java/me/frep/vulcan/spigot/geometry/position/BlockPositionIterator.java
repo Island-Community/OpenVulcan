@@ -1,0 +1,42 @@
+package me.frep.vulcan.spigot.geometry.position;
+
+import com.google.common.collect.AbstractIterator;
+
+final class BlockPositionIterator extends AbstractIterator<BlockPosition> {
+
+    private final BlockPosition minimum;
+
+    private final BlockPosition maximum;
+
+    private BlockPosition current;
+
+    BlockPositionIterator(BlockPosition minimum, BlockPosition maximum) {
+        this.minimum = minimum;
+        this.maximum = maximum;
+    }
+
+    @Override
+    protected BlockPosition computeNext() {
+        if (current == null) {
+            if (minimum.getX() > maximum.getX() || minimum.getY() > maximum.getY() || minimum.getZ() > maximum.getZ())
+                return endOfData();
+            current = new BlockPosition(minimum.getX(), minimum.getY(), minimum.getZ());
+            return current;
+        }
+        if (current.equals(maximum))
+            return endOfData();
+        int x = current.getX(), y = current.getY(), z = current.getZ();
+        if (x < maximum.getX())
+            x++;
+        else if (y < maximum.getY()) {
+            x = minimum.getX();
+            y++;
+        } else {
+            x = minimum.getX();
+            y = minimum.getY();
+            z++;
+        }
+        current = new BlockPosition(x, y, z);
+        return current;
+    }
+}
